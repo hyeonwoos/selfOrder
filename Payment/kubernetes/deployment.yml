@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: payment
-          image: hyeonwoos.azurecr.io/payment:v1
+          image: user12acr.azurecr.io/payment:v1
           ports:
             - containerPort: 8080
           env:
