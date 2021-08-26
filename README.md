@@ -188,8 +188,8 @@ public class PolicyHandler{
         		SimpleOrder simpleOrder = optional.get();
         		
         		simpleOrder.setStatus("Assigned");
-                // view 객체에 이벤트의 eventDirectValue 를 set 함
-                // view 레파지 토리에 save
+                // view 객체에 이벤트의 eventDirectValue를 set함
+                // view 레파지토리에 save
             	simpleOrderRepository.save(simpleOrder);
         	}
             
@@ -207,7 +207,7 @@ public class PolicyHandler{
 ![증빙1]
 
 # GateWay 적용
-API GateWay를 통하여 마이크로 서비스들의 집입점을 통일할 수 있다.
+API GateWay를 통하여 마이크로 서비스들의 진입점을 통일할 수 있다.
 다음과 같이 GateWay를 적용하였다.
 
 ```yaml
@@ -373,19 +373,19 @@ cd gateway
 mvn package
 
 cd ..
-cd simpleorder
+cd SimpleOrder
 mvn package
 
 cd ..
-cd payment
+cd Payment
 mvn package
 
 cd ..
-cd store
+cd Store
 mvn package
 
 cd ..
-cd simpleorderhome
+cd SimpleOrderHome
 mvn package
 ```
 
@@ -399,21 +399,21 @@ kubectl create deploy gateway --image=user12.azurecr/gateway:v1 -n tutorial
 kubectl expose deploy gateway --type=ClusterIP --port=8080 -n tutorial
 
 cd ..
-cd payment
+cd Payment
 az acr build --registry team04 --image user12.azurecr/payment:v1 .
 
 kubectl create deploy payment --image=user12.azurecr/payment:v1 -n tutorial
 kubectl expose deploy payment --type=ClusterIP --port=8080 -n tutorial
 
 cd ..
-cd store
+cd Store
 az acr build --registry team04 --image user12.azurecr/simpleorderhome:v1 .
 
 kubectl create deploy store --image=user12.azurecr/simpleorderhome:v1 -n tutorial
 kubectl expose deploy store --type=ClusterIP --port=8080 -n tutorial
 
 cd ..
-cd simpleorderhome
+cd SimpleOrderHome
 az acr build --registry team04 --image user12.azurecr/simpleorderhome:v1 .
 
 kubectl create deploy simpleorderhome --image=user12.azurecr/simpleorderhome:v1 -n tutorial
