@@ -551,8 +551,6 @@ kubectl autoscale deploy store --min=1 --max=10 --cpu-percent=15 -n tutorial
 kubectl exec -it pod/siege -c siege -n tutorial -- /bin/bash
 siege -c100 -t120S -r10 -v --content-type "application/json" 'http://10.0.88.201:8080/stores POST {"orderId": 111, "userId": "user10", "menuId": "menu10", "qty":10}'
 ```
-![오토스케일아웃_실행](https://user-images.githubusercontent.com/49510466/131082333-e343853c-96f2-4792-bc48-6c32b928c31c.png)
-
 ![image](https://user-images.githubusercontent.com/49510466/131079991-3cee4245-9d39-4e50-83ff-d49cee4aad34.png)
 - 오토스케일 모니터링을 걸어 스케일 아웃이 자동으로 진행됨을 확인한다.
 ```
