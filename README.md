@@ -522,7 +522,7 @@ spec:
 ```
 kubectl create configmap apiurl --from-literal=url=http://10.0.170.241:8080 -n tutorial
 ```
-![image](https://user-images.githubusercontent.com/49510466/131079991-3cee4245-9d39-4e50-83ff-d49cee4aad34.png)
+
 
 # 오토스케일 아웃
 
@@ -552,6 +552,7 @@ kubectl exec -it pod/siege -c siege -n tutorial -- /bin/bash
 siege -c100 -t120S -r10 -v --content-type "application/json" 'http://10.0.88.201:8080/stores POST {"orderId": 111, "userId": "user10", "menuId": "menu10", "qty":10}'
 ```
 ![autoscale(hpa) 실행 및 부하발생]
+![image](https://user-images.githubusercontent.com/49510466/131079991-3cee4245-9d39-4e50-83ff-d49cee4aad34.png)
 - 오토스케일 모니터링을 걸어 스케일 아웃이 자동으로 진행됨을 확인한다.
 ```
 kubectl get all -n tutorial
