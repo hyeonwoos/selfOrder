@@ -598,8 +598,7 @@ hystrix:
   
   동시 사용자 100명, 60초 동안 실시 
 ```
-siege -c100 -t60S -r10 -v --content-type "application/json" 'http://10.0.88.201:8080/simpleOrders 
-POST {"userId": "user10", "menuId": "menu10", "qty":10}'
+siege -c100 -t60S -r10 -v --content-type "application/json" '20.200.229.147:8080/simpleOrders POST {"userId": "user10", "menuId": "menu10", "qty":10}'
 ```
 - 부하 발생하여 CB가 발동하여 요청 실패처리하였고, 밀린 부하가 다시 처리되면서 SimpleOrders를 받기 시작
 
