@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: simpleorder
-          image: hyeonwoos.azurecr.io/simpleorder:v1
+          image: user23.azurecr.io/simpleorder:v1
           ports:
             - containerPort: 8080
           env:
