@@ -602,7 +602,7 @@ siege -c100 -t60S -r10 -v --content-type "application/json" '20.200.229.147:8080
 ```
 - 부하 발생하여 CB가 발동하여 요청 실패처리하였고, 밀린 부하가 다시 처리되면서 SimpleOrders를 받기 시작
 
-![증빙10]
+![서킷브레이킹(증빙10)](https://user-images.githubusercontent.com/88122579/131077639-a684ec4d-4705-4816-821e-ff09cee8855b.png)
 
 # 무정지 배포
 
