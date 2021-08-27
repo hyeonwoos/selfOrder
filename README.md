@@ -548,8 +548,8 @@ kubectl autoscale deploy store --min=1 --max=10 --cpu-percent=15 -n tutorial
 ```
 - siege를 활용해서 워크로드를 2분간 걸어준다. (Cloud 내 siege pod에서 부하줄 것)
 ```
-kubectl exec -it pod/siege -c siege -n tutorial -- /bin/bash
-siege -c100 -t120S -r10 -v --content-type "application/json" 'http://10.0.88.201:8080/stores POST {"orderId": 111, "userId": "user10", "menuId": "menu10", "qty":10}'
+kubectl exec -it siege -c siege -- /bin/bash
+siege -c100 -t60S -r10 -v --content-type "application/json" 'http://20.200.227.169:8080/stores POST {"orderId": 111, "userId": "user10", "menuId": "menu10", "qty":10}'
 ```
 ![오토스케일아웃_실행](https://user-images.githubusercontent.com/88122579/131080888-1c3f7c34-1bd4-4b58-9c2a-c4ced5ba0893.png)
 
