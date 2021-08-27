@@ -21,6 +21,11 @@
 
 ![EventStorming_V1](https://user-images.githubusercontent.com/19971917/130919916-353cbf6a-f9dc-4e96-ac37-fcbba4648fb1.png)
 
+# 부적격 이벤트 탈락
+
+![부적격 이벤트 탈락](https://user-images.githubusercontent.com/49510466/131070824-5da92df1-dc82-40a5-ac09-5bdc0e665db7.PNG)
+
+
 # 헥사고날 아키텍처 다이어그램 도출
 
 ![헥사고날 아키텍처 다이어그램도출](https://user-images.githubusercontent.com/19971917/130926489-1e144091-ea40-40c4-91e1-ea1db26f16dd.png)
@@ -204,7 +209,7 @@ public class PolicyHandler{
   
 - 원격 주문 (SimpleOrder 동작 후 결과)
 
-![증빙1]
+![image](https://user-images.githubusercontent.com/49510466/131070673-73ab85a6-65d1-42d4-a6b8-c17de50e3e97.png)
 
 # GateWay 적용
 API GateWay를 통하여 마이크로 서비스들의 진입점을 통일할 수 있다.
@@ -294,7 +299,7 @@ Materialized View 를 구현하여, 타 마이크로서비스의 데이터 원�
 
 - 주문(ordered) 실행 후 SimpleOrderHomes 화면
 
-![증빙2]
+![image](https://user-images.githubusercontent.com/49510466/131071310-908d5804-7c43-4a19-8ac7-ff742546665d.png)
 
 - 주문(OrderCancelled) 취소 후 SimpleOrderHomes 화면
 
