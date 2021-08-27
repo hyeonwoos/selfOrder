@@ -305,7 +305,7 @@ Materialized View 를 구현하여, 타 마이크로서비스의 데이터 원�
 
 ![image](https://user-images.githubusercontent.com/49510466/131072048-247bfdcc-1f34-4bf1-8407-cb20bf93ade3.png)
 
-위와 같이 주문을 하게되면 SimpleOrder -> Payment -> Store -> SimpleOrder 로 주문이 Assigend 되고
+위와 같이 주문을 하게되면 SimpleOrder -> Payment -> Store -> SimpleOrderHome로 주문이 처리되어 Assigned 되고
 
 주문 취소가 되면 Status가 refunded로 Update 되는 것을 볼 수 있다.
 
