@@ -557,7 +557,8 @@ siege -c100 -t120S -r10 -v --content-type "application/json" 'http://10.0.88.201
 ```
 kubectl get all -n tutorial
 ```
-![autoscale(hpa)결과]
+![오토스케일아웃_결과](https://user-images.githubusercontent.com/88122579/131081151-fcfa9e86-f4cc-41d3-90e4-af81b142477d.png)
+
 
 # 서킷 브레이킹
 
