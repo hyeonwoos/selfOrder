@@ -671,6 +671,8 @@ team04/Store/kubernetes/deployment.yml
 # Self-healing (Liveness Probe)
 
 - Self-healing 확인을 위한 Liveness Probe 옵션 변경
+![image](https://user-images.githubusercontent.com/49510466/131082754-fbc0327b-18e7-498f-ae5c-030ab1112b09.png)
+
 team04/Store/kubernetes/deployment_live.yml
 ```yml
           readinessProbe:
@@ -691,9 +693,9 @@ team04/Store/kubernetes/deployment_live.yml
 
 - Store pod에 Liveness Probe 옵션 적용 확인
 
-![self-healing설정 결과]
+![image](https://user-images.githubusercontent.com/49510466/131083494-d559d9fb-6f68-4882-aefc-f4e5258dec4d.png)
 
 - Store pod에서 적용 시 retry발생 확인
 
-![self-healing설정 후 restart증적]
+![image](https://user-images.githubusercontent.com/49510466/131084109-83441877-f9b6-44da-a469-d2978e1491f3.png)
 
