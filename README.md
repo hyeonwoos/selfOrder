@@ -633,7 +633,7 @@ team04/Store/kubernetes/deployment_n_readiness.yml
 ```
 - 무정지 배포가 되지 않아 Siege 결과 Availability가 100%가 되지 않음
 
-![무정지배포(readiness 제외) 실행]
+![image](https://user-images.githubusercontent.com/49510466/131080826-3a8dd061-2059-4f59-99b8-13e7d794e93e.png)
 ![무정지배포(readiness 제외) 실행결과]
 
 - 무정지 배포를 위한 readiness 옵션 설정
