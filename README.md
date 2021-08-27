@@ -548,17 +548,15 @@ kubectl autoscale deploy store --min=1 --max=10 --cpu-percent=15 -n tutorial
 ```
 - siege를 활용해서 워크로드를 2분간 걸어준다. (Cloud 내 siege pod에서 부하줄 것)
 ```
-kubectl exec -it siege -c siege -- /bin/bash
-siege -c100 -t60S -r10 -v --content-type "application/json" 'http://20.200.227.169:8080/stores POST {"orderId": 111, "userId": "user10", "menuId": "menu10", "qty":10}'
+kubectl exec -it pod/siege -c siege -n tutorial -- /bin/bash
+siege -c100 -t120S -r10 -v --content-type "application/json" 'http://10.0.88.201:8080/stores POST {"orderId": 111, "userId": "user10", "menuId": "menu10", "qty":10}'
 ```
-![오토스케일아웃_실행](https://user-images.githubusercontent.com/88122579/131080888-1c3f7c34-1bd4-4b58-9c2a-c4ced5ba0893.png)
-
+![autoscale(hpa) 실행 및 부하발생]
 - 오토스케일 모니터링을 걸어 스케일 아웃이 자동으로 진행됨을 확인한다.
 ```
 kubectl get all -n tutorial
 ```
-![오토스케일아웃_결과](https://user-images.githubusercontent.com/88122579/131081151-fcfa9e86-f4cc-41d3-90e4-af81b142477d.png)
-
+![autoscale(hpa)결과]
 
 # 서킷 브레이킹
 
@@ -636,7 +634,7 @@ team04/Store/kubernetes/deployment_n_readiness.yml
 - 무정지 배포가 되지 않아 Siege 결과 Availability가 100%가 되지 않음
 
 ![image](https://user-images.githubusercontent.com/49510466/131080826-3a8dd061-2059-4f59-99b8-13e7d794e93e.png)
-![무정지배포(readiness 제외) 실행결과]
+![image](https://user-images.githubusercontent.com/49510466/131081804-1e8916a1-383a-41bb-89dc-4528c4066a66.png)
 
 - 무정지 배포를 위한 readiness 옵션 설정
 team04/Store/kubernetes/deployment.yml
@@ -667,8 +665,8 @@ team04/Store/kubernetes/deployment.yml
 
 - 무정지 배포를 위한 readiness 옵션 설정 후 적용 시 Siege 결과 Availability가 100% 확인
 
-![무정지배포(readiness 포함) 설정 및 실행]
-![무정지배포(readiness 포함) 설정 결과]
+![image](https://user-images.githubusercontent.com/49510466/131081370-4ac1495e-7322-4a6b-b25a-c5f9949f228f.png)
+![image](https://user-images.githubusercontent.com/49510466/131081754-16cfa937-6f9e-4634-9488-5ba21271f47e.png)
 
 # Self-healing (Liveness Probe)
 
