@@ -303,15 +303,15 @@ Materialized View 를 구현하여, 타 마이크로서비스의 데이터 원�
 
 - 주문(OrderCancelled) 취소 후 SimpleOrderHomes 화면
 
-![증빙3]
+![image](https://user-images.githubusercontent.com/49510466/131072048-247bfdcc-1f34-4bf1-8407-cb20bf93ade3.png)
 
 위와 같이 주문을 하게되면 SimpleOrder -> Payment -> Store -> SimpleOrder 로 주문이 Assigend 되고
 
 주문 취소가 되면 Status가 refunded로 Update 되는 것을 볼 수 있다.
 
-또한 Correlation을 key를 활용하여 orderId를 Key값을 하고 원하는 주문하고 서비스간의 공유가 이루어 졌다.
+또한 Correlation을 key를 활용하여 orderId를 Key값으로 하고 원하는 주문하고 서비스간의 공유가 이루어지도록 하였다.
 
-위 결과로 서로 다른 마이크로 서비스 간에 트랜잭션이 묶여 있음을 알 수 있다.
+위의 결과로 서로 다른 마이크로서비스 간에 트랜잭션이 묶여 있음을 알 수 있다.
 
 # 폴리글랏
 
@@ -319,15 +319,16 @@ Store 서비스의 DB와 SimpleOrder의 DB를 다른 DB를 사용하여 폴리�
 
 **Store의 pom.xml DB 설정 코드**
 
-![증빙5]
+![image](https://user-images.githubusercontent.com/49510466/131072664-7e52d462-0f39-41d0-859f-44654acacd29.png)
 
 **SimpleOrder의 pom.xml DB 설정 코드**
 
-![증빙4]
+![image](https://user-images.githubusercontent.com/49510466/131072537-bdc1a2f8-c431-4286-88b3-1e7c64cb0bcb.png)
 
 # 동기식 호출 과 Fallback 처리
 
-분석단계에서의 조건 중 하나로 주문(SimpleOrder)->결제(pay) 간의 호출은 동기식 일관성을 유지하는 트랜잭션으로 처리하기로 하였다. 호출 프로토콜은 Rest Repository 에 의해 노출되어있는 REST 서비스를 FeignClient 를 이용하여 호출하도록 한다.
+분석단계에서의 조건 중 하나로 주문(SimpleOrder)->결제(pay) 간의 호출은 동기식 일관성을 유지하는 트랜잭션으로 처리하기로 하였다. 
+호출 프로토콜은 Rest Repository에 의해 노출되어있는 REST 서비스를 FeignClient를 이용하여 호출하도록 한다.
 
 **SimpleOrder 서비스 내 external.PaymentService**
 ```java
@@ -350,18 +351,18 @@ public interface PaymentService {
 ```
 
 **동작 확인**
-- 잠시 Payment 서비스 중시
+- 잠시 Payment 서비스 중지시킴
 
-![증빙6]
+![image](https://user-images.githubusercontent.com/49510466/131073007-a286c684-c4a7-4fc1-a941-9d05d27d5b75.png)
 
 - 주문 요청시 에러 발생
 
-![증빙7]
+![image](https://user-images.githubusercontent.com/49510466/131072921-dba5f43f-9b76-4783-87c1-59710509ff0b.png)
 
 - Payment 서비스 재기동 후 정상동작 확인
 
-![증빙8]
-![증빙9]
+![image](https://user-images.githubusercontent.com/49510466/131074016-3e56146e-67bc-4f96-9589-9397aa61b7f8.png)
+![image](https://user-images.githubusercontent.com/49510466/131073927-927d81f7-461b-465e-b397-05ba1cb418ce.png)
 
 # 운영
 
