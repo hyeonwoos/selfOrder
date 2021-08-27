@@ -398,41 +398,49 @@ mvn package
 - Docker Image Push/deploy/서비스생성
 ```
 cd gateway
-az acr build --registry team04 --image user12.azurecr/gateway:v1 .
-kubectl create ns tutorial
+docker build -t team04acr.azurecr.io/gateway:v1 .
+docker push team04acr.azurecr.io/gateway:v1
 
-kubectl create deploy gateway --image=user12.azurecr/gateway:v1 -n tutorial
+kubectl create ns tutorial
+kubectl create deploy gateway --image=team04acr.azurecr.io/gateway:v1 -n tutorial
 kubectl expose deploy gateway --type=ClusterIP --port=8080 -n tutorial
+
+kubectl create deploy simpleorder --image=team04acr.azurecr.io/simpleorder:v1 -n tutorial
+kubectl expose deploy simpleorder --type=ClusterIP --port=8080 -n tutorial
 
 cd ..
 cd Payment
-az acr build --registry team04 --image user12.azurecr/payment:v1 .
+docker build -t team04acr.azurecr.io/payment:v1 .
+docker push team04acr.azurecr.io/payment:v1
 
-kubectl create deploy payment --image=user12.azurecr/payment:v1 -n tutorial
+kubectl create deploy payment --image=team04acr.azurecr.io/payment:v1 -n tutorial
 kubectl expose deploy payment --type=ClusterIP --port=8080 -n tutorial
 
 cd ..
 cd Store
-az acr build --registry team04 --image user12.azurecr/simpleorderhome:v1 .
+docker build -t team04acr.azurecr.io/store:v1 .
+docker push team04acr.azurecr.io/store:v1
 
-kubectl create deploy store --image=user12.azurecr/simpleorderhome:v1 -n tutorial
+kubectl create deploy store --image=team04acr.azurecr.io/store:v1 -n tutorial
 kubectl expose deploy store --type=ClusterIP --port=8080 -n tutorial
 
 cd ..
 cd SimpleOrderHome
-az acr build --registry team04 --image user12.azurecr/simpleorderhome:v1 .
+docker build -t team04acr.azurecr.io/simpleorderhome:v1 .
+docker push team04acr.azurecr.io/simpleorderhome:v1
 
-kubectl create deploy simpleorderhome --image=user12.azurecr/simpleorderhome:v1 -n tutorial
+kubectl create deploy simpleorderhome --image=team04acr.azurecr.io/simpleorderhome:v1 -n tutorial
 kubectl expose deploy simpleorderhome --type=ClusterIP --port=8080 -n tutorial
 ```
 
 - yml파일 이용한 deploy
 ```
 cd ..
-cd SimpleOrder
-az acr build --registry team04 --image user12.azurecr/simpleorder:v1 .
+cd  SimpleOrder
+docker build -t team04acr.azurecr.io/simpleorder:v1 .
+docker push team04acr.azurecr.io/simpleorder:v1
 ```
-![증빙7]
+![image](https://user-images.githubusercontent.com/49510466/131075585-a8a4d4df-3fe8-4c5e-81fb-46e7e91686b6.png)
 
 ```
 kubectl expose deploy store --type=ClusterIP --port=8080 -n tutorial
@@ -459,7 +467,7 @@ spec:
     spec:
       containers:
         - name: simpleorder
-          image: user12.azurecr.io/simpleorder:v1
+          image: team04acr.azurecr.io/simpleorder:v1
           ports:
             - containerPort: 8080
           env:
@@ -471,7 +479,7 @@ spec:
 ```	  
 - deploy 완료
 
-![전체 MSA]
+![image](https://user-images.githubusercontent.com/49510466/131075892-47da833e-527b-4ae5-8103-d9043a5f9100.png)
 
 # ConfigMap 
 - 시스템별로 변경 가능성이 있는 설정들을 ConfigMap을 사용하여 관리
@@ -507,12 +515,12 @@ spec:
 
 - Deployment.yml 에 ConfigMap 적용
 
-![image]
+![image](https://user-images.githubusercontent.com/49510466/131075991-013980f8-60c7-4711-8e47-fd9afc0ef693.png)
 
 - ConfigMap 생성
 
 ```
-kubectl create configmap apiurl --from-literal=url=http://10.0.92.205:8080 -n tutorial
+kubectl create configmap apiurl --from-literal=url=http://10.0.170.241:8080 -n tutorial
 ```
 
    ![image]
@@ -542,7 +550,7 @@ kubectl autoscale deploy store --min=1 --max=10 --cpu-percent=15 -n tutorial
 - siege를 활용해서 워크로드를 2분간 걸어준다. (Cloud 내 siege pod에서 부하줄 것)
 ```
 kubectl exec -it pod/siege -c siege -n tutorial -- /bin/bash
-siege -c100 -t120S -r10 -v --content-type "application/json" 'http://10.0.14.180:8080/stores POST {"orderId": 111, "userId": "user10", "menuId": "menu10", "qty":10}'
+siege -c100 -t120S -r10 -v --content-type "application/json" 'http://10.0.88.201:8080/stores POST {"orderId": 111, "userId": "user10", "menuId": "menu10", "qty":10}'
 ```
 ![autoscale(hpa) 실행 및 부하발생]
 - 오토스케일 모니터링을 걸어 스케일 아웃이 자동으로 진행됨을 확인한다.
@@ -590,7 +598,7 @@ hystrix:
   
   동시 사용자 100명, 60초 동안 실시 
 ```
-siege -c100 -t60S -r10 -v --content-type "application/json" 'http://10.0.14.180:8080/simpleOrders 
+siege -c100 -t60S -r10 -v --content-type "application/json" 'http://10.0.88.201:8080/simpleOrders 
 POST {"userId": "user10", "menuId": "menu10", "qty":10}'
 ```
 - 부하 발생하여 CB가 발동하여 요청 실패처리하였고, 밀린 부하가 다시 처리되면서 SimpleOrders를 받기 시작
