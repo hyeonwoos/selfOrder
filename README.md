@@ -209,7 +209,7 @@ public class PolicyHandler{
   
 - 원격 주문 (SelfOrder 동작 후 결과)
 
-![image](https://user-images.githubusercontent.com/49510466/131070673-73ab85a6-65d1-42d4-a6b8-c17de50e3e97.png)
+![image](https://user-images.githubusercontent.com/49510466/132097680-69515d92-08c6-43de-9ff1-c7accf634273.png)
 
 # GateWay 적용
 API GateWay를 통하여 마이크로 서비스들의 진입점을 통일할 수 있다.
@@ -299,11 +299,11 @@ Materialized View 를 구현하여, 타 마이크로서비스의 데이터 원�
 
 - 주문(ordered) 실행 후 SelfOrderHomes 화면
 
-![image](https://user-images.githubusercontent.com/49510466/131071310-908d5804-7c43-4a19-8ac7-ff742546665d.png)
+![image](https://user-images.githubusercontent.com/49510466/132097760-7779c5b3-ae23-4ab3-86c7-3822684692ab.png)
 
 - 주문(OrderCancelled) 취소 후 SelfOrderHomes 화면
 
-![image](https://user-images.githubusercontent.com/49510466/131072048-247bfdcc-1f34-4bf1-8407-cb20bf93ade3.png)
+![image](https://user-images.githubusercontent.com/49510466/132099074-98691d0b-e6a7-4045-8845-25e9544ffd02.png)
 
 위와 같이 주문을 하게되면 SelfOrder -> Payment -> Store -> SelfOrderHome로 주문이 처리되어 Assigned 되고
 
@@ -319,11 +319,11 @@ Store 서비스의 DB와 SelfOrder의 DB를 다른 DB를 사용하여 폴리글�
 
 **Store의 pom.xml DB 설정 코드**
 
-![image](https://user-images.githubusercontent.com/49510466/131072664-7e52d462-0f39-41d0-859f-44654acacd29.png)
+![image](https://user-images.githubusercontent.com/49510466/132099264-c8d4b045-9512-41ea-b18e-823ed7cc6b26.png)
 
 **SelfOrder의 pom.xml DB 설정 코드**
 
-![image](https://user-images.githubusercontent.com/49510466/131072537-bdc1a2f8-c431-4286-88b3-1e7c64cb0bcb.png)
+![image](https://user-images.githubusercontent.com/49510466/132099246-4c0ff067-8c38-4019-8392-a914932dfb98.png)
 
 # 동기식 호출 과 Fallback 처리
 
@@ -353,16 +353,16 @@ public interface PaymentService {
 **동작 확인**
 - 잠시 Payment 서비스 중지시킴
 
-![image](https://user-images.githubusercontent.com/49510466/131073007-a286c684-c4a7-4fc1-a941-9d05d27d5b75.png)
+![image](https://user-images.githubusercontent.com/49510466/132099536-3fd66a28-05af-4637-938e-969347405fb8.png)
 
-- 주문 요청시 에러 발생
+- 주문 요청 시 에러 발생
 
-![image](https://user-images.githubusercontent.com/49510466/131072921-dba5f43f-9b76-4783-87c1-59710509ff0b.png)
+![image](https://user-images.githubusercontent.com/49510466/132099391-47052640-cf74-498a-a9c3-f624d1d52adf.png)
 
 - Payment 서비스 재기동 후 정상동작 확인
 
-![image](https://user-images.githubusercontent.com/49510466/131074016-3e56146e-67bc-4f96-9589-9397aa61b7f8.png)
-![image](https://user-images.githubusercontent.com/49510466/131073927-927d81f7-461b-465e-b397-05ba1cb418ce.png)
+![image](https://user-images.githubusercontent.com/49510466/132099588-b383b493-9fb7-493a-bb9a-0df42a40e8ae.png)
+![image](https://user-images.githubusercontent.com/49510466/132099666-5b11b2ed-5345-46af-9c49-33f6ebb78a26.png)
 
 # 운영
 
