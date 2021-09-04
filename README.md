@@ -1,4 +1,4 @@
-# God Burger 셀프오더(Self Order)
+# Burger God 셀프오더(Self Order)
 # 서비스 시나리오
 ### 기능적 요구사항
 1. 고객이 메뉴를 선택하여 주문한다.
