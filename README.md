@@ -19,7 +19,7 @@
 
 # Event Storming 결과
 
-![EventStorming_V1](https://user-images.githubusercontent.com/19971917/130919916-353cbf6a-f9dc-4e96-ac37-fcbba4648fb1.png)
+![EventStorming_V1](https://user-images.githubusercontent.com/49510466/132094172-f2bc2eb8-fedc-45f0-a7d4-fc5a74fdd518.png)
 
 # 부적격 이벤트 탈락
 
@@ -28,7 +28,7 @@
 
 # 헥사고날 아키텍처 다이어그램 도출
 
-![헥사고날 아키텍처 다이어그램도출](https://user-images.githubusercontent.com/19971917/130926489-1e144091-ea40-40c4-91e1-ea1db26f16dd.png)
+![헥사고날 아키텍처 다이어그램도출](https://user-images.githubusercontent.com/49510466/132094517-c4e6549d-fcd0-41cc-b70b-8861d34681f5.png)
 
 
 # 구현
