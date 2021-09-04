@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: payment
-          image: user12acr.azurecr.io/payment:v1
+          image: swatacracr.azurecr.io/payment:v1
           ports:
             - containerPort: 8080
           env:

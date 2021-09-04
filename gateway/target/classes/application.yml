@@ -8,10 +8,10 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: SimpleOrder
+        - id: SelfOrder
           uri: http://localhost:8081
           predicates:
-            - Path=/simpleOrders/** 
+            - Path=/selfOrders/** 
         - id: Payment
           uri: http://localhost:8082
           predicates:
@@ -20,10 +20,10 @@ spring:
           uri: http://localhost:8083
           predicates:
             - Path=/stores/** 
-        - id: SimpleOrderHome
+        - id: SelfOrderHome
           uri: http://localhost:8084
           predicates:
-            - Path= /simpleOrderHomes/**
+            - Path= /selfOrderHomes/**
       globalcors:
         corsConfigurations:
           '[/**]':
@@ -43,10 +43,10 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: SimpleOrder
-          uri: http://SimpleOrder:8080
+        - id: SelfOrder
+          uri: http://SelfOrder:8080
           predicates:
-            - Path=/simpleOrders/** 
+            - Path=/selfOrders/** 
         - id: Payment
           uri: http://Payment:8080
           predicates:
@@ -55,10 +55,10 @@ spring:
           uri: http://Store:8080
           predicates:
             - Path=/stores/** 
-        - id: SimpleOrderHome
-          uri: http://SimpleOrderHome:8080
+        - id: SelfOrderHome
+          uri: http://SelfOrderHome:8080
           predicates:
-            - Path= /simpleOrderHomes/**
+            - Path= /selfOrderHomes/**
       globalcors:
         corsConfigurations:
           '[/**]':

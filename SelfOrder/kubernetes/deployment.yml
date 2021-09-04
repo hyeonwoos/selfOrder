@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: selforder
+  namespace: tutorial
+  labels:
+    app: selforder
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: selforder
+  template:
+    metadata:
+      labels:
+        app: selforder
+    spec:
+      containers:
+        - name: selforder
+          image: swatacr.azurecr.io/selforder:v1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: configurl
+              valueFrom:
+                configMapKeyRef:
+                  name: apiurl
+                  key: url

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: selforderhome
+  namespace: tutorial
+  labels:
+    app: selforderhome
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: selforderhome

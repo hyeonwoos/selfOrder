@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: store
-          image: user23.azurecr.io/store:v1
+          image: swatacr.azurecr.io/store:v1
           ports:
             - containerPort: 8080
           readinessProbe:
