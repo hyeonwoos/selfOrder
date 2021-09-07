@@ -440,7 +440,7 @@ cd  SelfOrder
 docker build -t hyeonwoo.azurecr.io/selforder:v1 .
 docker push hyeonwoo.azurecr.io/selforder:v1
 ```
-![image](https://user-images.githubusercontent.com/49510466/131075585-a8a4d4df-3fe8-4c5e-81fb-46e7e91686b6.png)
+![image](https://user-images.githubusercontent.com/49510466/132284749-c7529a99-33c6-4cc7-abf8-936bf99baa6f.png)
 
 ```
 kubectl expose deploy store --type=ClusterIP --port=8080 -n tutorial
@@ -479,7 +479,11 @@ spec:
 ```	  
 - deploy 완료
 
-![image](https://user-images.githubusercontent.com/49510466/131075892-47da833e-527b-4ae5-8103-d9043a5f9100.png)
+![image](https://user-images.githubusercontent.com/49510466/132284564-666caded-380a-457b-a6f4-fd0e7ea58e93.png)
+
+![image](https://user-images.githubusercontent.com/49510466/132284859-1038a50b-cf4d-4366-afad-c749dd755727.png)
+
+![image](https://user-images.githubusercontent.com/49510466/132285265-fdfe24a9-329d-45d9-984f-e6beb1157147.png)
 
 # ConfigMap 
 - 시스템별로 변경 가능성이 있는 설정들을 ConfigMap을 사용하여 관리
@@ -515,7 +519,7 @@ spec:
 
 - Deployment.yml 에 ConfigMap 적용
 
-![image](https://user-images.githubusercontent.com/49510466/131075991-013980f8-60c7-4711-8e47-fd9afc0ef693.png)
+![image](https://user-images.githubusercontent.com/49510466/132286415-17f4dc80-818c-4d1c-926f-8b9a13a636bc.png)
 
 - ConfigMap 생성
 
