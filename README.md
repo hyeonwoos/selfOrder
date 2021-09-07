@@ -553,14 +553,15 @@ kubectl autoscale deploy store --min=1 --max=10 --cpu-percent=15 -n tutorial
 - siege를 활용해서 워크로드를 2분간 걸어준다. (Cloud 내 siege pod에서 부하줄 것)
 ```
 kubectl exec -it pod/siege -c siege -n tutorial -- /bin/bash
-siege -c100 -t120S -r10 -v --content-type "application/json" 'http://10.0.88.201:8080/stores POST {"orderId": 111, "userId": "song", "menuId": "doublebgr", "qty":10}'
+siege -c100 -t120S -r10 -v --content-type "application/json" 'http://20.200.207.111:8080/stores POST {"orderId": 111, "userId": "smith", "menuId": "whopper", "qty":10}'
 ```
-![image](https://user-images.githubusercontent.com/49510466/131079991-3cee4245-9d39-4e50-83ff-d49cee4aad34.png)
+![image](https://user-images.githubusercontent.com/49510466/132291288-756d5a60-a564-49e6-ad0f-62b9de9b1ba4.png)
+
 - 오토스케일 모니터링을 걸어 스케일 아웃이 자동으로 진행됨을 확인한다.
 ```
 kubectl get all -n tutorial
 ```
-![오토스케일아웃_결과](https://user-images.githubusercontent.com/49510466/131082237-dfc12c8f-d3fb-4da8-a813-81a0f4058e0f.png)
+![image](https://user-images.githubusercontent.com/49510466/132290975-023bc79c-c93b-4f81-b9b8-a12e4bc35a4d.png)
 
 # 서킷 브레이킹
 
@@ -601,11 +602,11 @@ hystrix:
   
   동시 사용자 100명, 60초 동안 실시 
 ```
-siege -c100 -t60S -r10 -v --content-type "application/json" '20.200.229.147:8080/selfOrders POST {"userId": "song", "menuId": "cheesebgr", "qty":10}'
+siege -c100 -t60S -r10 -v --content-type "application/json" 'http://20.200.207.111:8080/selfOrders POST {"userId": "smith", "menuId": "whopper", "qty":10}'
 ```
 - 부하 발생하여 CB가 발동하여 요청 실패처리하였고, 밀린 부하가 다시 처리되면서 SelfOrders를 받기 시작
-
-![서킷브레이킹(증빙10)](https://user-images.githubusercontent.com/88122579/131077639-a684ec4d-4705-4816-821e-ff09cee8855b.png)
+- 
+![image](https://user-images.githubusercontent.com/49510466/132291976-b1fa0555-0a79-4879-b24d-aa791b2759fd.png)
 
 # 무정지 배포
 
