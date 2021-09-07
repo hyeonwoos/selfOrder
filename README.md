@@ -608,10 +608,10 @@ siege -c100 -t60S -r10 -v --content-type "application/json" 'http://20.200.207.1
 - 
 ![image](https://user-images.githubusercontent.com/49510466/132291976-b1fa0555-0a79-4879-b24d-aa791b2759fd.png)
 
-# 무정지 배포
+# 무정지 배포(Zero-downtime deploy (readiness probe))
 
 - 무정지 배포가 되지 않는 readiness 옵션을 제거 설정
-swat/Store/kubernetes/deployment_n_readiness.yml
+swat/Store/kubernetes/deployment_n_read.yml
 ```yml
     spec:
       containers:
@@ -636,10 +636,11 @@ swat/Store/kubernetes/deployment_n_readiness.yml
             periodSeconds: 5
             failureThreshold: 5
 ```
+![image](https://user-images.githubusercontent.com/49510466/132292820-40d0b958-6dba-4119-baa9-1bcca802c973.png)
+
 - 무정지 배포가 되지 않아 Siege 결과 Availability가 100%가 되지 않음
 
-![image](https://user-images.githubusercontent.com/49510466/131080826-3a8dd061-2059-4f59-99b8-13e7d794e93e.png)
-![image](https://user-images.githubusercontent.com/49510466/131081804-1e8916a1-383a-41bb-89dc-4528c4066a66.png)
+
 
 - 무정지 배포를 위한 readiness 옵션 설정
 swat/Store/kubernetes/deployment.yml
