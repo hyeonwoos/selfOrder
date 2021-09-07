@@ -605,7 +605,7 @@ hystrix:
 siege -c100 -t60S -r10 -v --content-type "application/json" 'http://20.200.207.111:8080/selfOrders POST {"userId": "smith", "menuId": "whopper", "qty":10}'
 ```
 - 부하 발생하여 CB가 발동하여 요청 실패처리하였고, 밀린 부하가 다시 처리되면서 SelfOrders를 받기 시작
-- 
+ 
 ![image](https://user-images.githubusercontent.com/49510466/132291976-b1fa0555-0a79-4879-b24d-aa791b2759fd.png)
 
 # 무정지 배포(Zero-downtime deploy (readiness probe))
