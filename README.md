@@ -524,7 +524,7 @@ spec:
 - ConfigMap 생성
 
 ```
-kubectl create configmap apiurl --from-literal=url=http://10.0.170.241:8080 -n tutorial
+kubectl create configmap apiurl --from-literal=url=http://10.0.182.34 -n tutorial
 ```
 
 
