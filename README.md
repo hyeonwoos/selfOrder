@@ -370,7 +370,7 @@ public interface PaymentService {
 
 - git에서 소스 가져오기
 ```
-git clone https://github.com/swatacr/selfOrder.git
+git clone https://github.com/hyeonwoos/selfOrder.git
 ```
 - Build 하기
 ```
