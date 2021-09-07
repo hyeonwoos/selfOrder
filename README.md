@@ -610,39 +610,7 @@ siege -c100 -t60S -r10 -v --content-type "application/json" 'http://20.200.207.1
 
 # 무정지 배포(Zero-downtime deploy (readiness probe))
 
-- 무정지 배포가 되지 않는 readiness 옵션을 제거 설정
-swat/Store/kubernetes/deployment_n_read.yml
-```yml
-    spec:
-      containers:
-        - name: store
-          image: hyeonwoo.azurecr.io/store:v1
-          ports:
-            - containerPort: 8080
-#          readinessProbe:
-#            httpGet:
-#              path: '/actuator/health'
-#              port: 8080
-#            initialDelaySeconds: 10
-#            timeoutSeconds: 2
-#            periodSeconds: 5
-#            failureThreshold: 10
-          livenessProbe:
-            httpGet:
-              path: '/actuator/health'
-              port: 8080
-            initialDelaySeconds: 120
-            timeoutSeconds: 2
-            periodSeconds: 5
-            failureThreshold: 5
-```
-![image](https://user-images.githubusercontent.com/49510466/132292820-40d0b958-6dba-4119-baa9-1bcca802c973.png)
-
-- 무정지 배포가 되지 않아 Siege 결과 Availability가 100%가 되지 않음
-
-
-
-- 무정지 배포를 위한 readiness 옵션 설정
+- 무정지 배포를 위한 readiness 옵션 설정 적용
 swat/Store/kubernetes/deployment.yml
 ```yml
     spec:
@@ -671,8 +639,26 @@ swat/Store/kubernetes/deployment.yml
 
 - 무정지 배포를 위한 readiness 옵션 설정 후 적용 시 Siege 결과 Availability가 100% 확인
 
-![image](https://user-images.githubusercontent.com/49510466/131081370-4ac1495e-7322-4a6b-b25a-c5f9949f228f.png)
-![image](https://user-images.githubusercontent.com/49510466/131081754-16cfa937-6f9e-4634-9488-5ba21271f47e.png)
+- siege를 활용해서 워크로드를 2분간 걸어준다. (Cloud 내 siege pod에서 부하줄 것)
+```
+kubectl exec -it pod/siege -c siege -n tutorial -- /bin/bash
+siege -c100 -t120S -r10 -v --content-type "application/json" 'http://20.200.207.111:8080/stores POST {"orderId": 111, "userId": "smith", "menuId": "whopper", "qty":10}'
+```
+먼저 store 이미지가 v1 임을 확인하고 readiness 설정이 적용되어 있음을 확인
+![image](https://user-images.githubusercontent.com/49510466/132306379-640b09b8-4e2b-4978-ae40-3bcc135cb908.png)
+
+새 버전으로 배포(이미지를 v2으로 변경)
+```
+kubectl set image deployment store store=hyeonwoo.azurecr.io/store:v2 -n tutorial
+```
+![image](https://user-images.githubusercontent.com/49510466/132306493-8cc783d3-029e-4555-bc11-853579dbae65.png)
+
+store 이미지가 v2 임을 확인
+![image](https://user-images.githubusercontent.com/49510466/132306521-610529b5-8421-4771-8193-e276404fa228.png)
+
+Siege 결과 Availability가 100% 확인
+![image](https://user-images.githubusercontent.com/49510466/132308384-6b6c73ae-cba0-4050-927f-4b51bbb75a36.png)
+
 
 # Self-healing (Liveness Probe)
 
@@ -699,9 +685,14 @@ swat/Store/kubernetes/deployment_live.yml
 
 - Store pod에 Liveness Probe 옵션 적용 확인
 
-![image](https://user-images.githubusercontent.com/49510466/131083494-d559d9fb-6f68-4882-aefc-f4e5258dec4d.png)
+![image](https://user-images.githubusercontent.com/49510466/132307371-1f199e71-2a13-4eb7-bb0c-15f5d4249ebd.png)
 
 - Store pod에서 적용 시 retry발생 확인
 
-![image](https://user-images.githubusercontent.com/49510466/131084109-83441877-f9b6-44da-a469-d2978e1491f3.png)
+![image](https://user-images.githubusercontent.com/49510466/132308272-20491c4c-84d4-4f08-bca5-a47758bba096.png)
+
+![image](https://user-images.githubusercontent.com/49510466/132307921-51657cbe-97ee-4f76-a161-f6d3c71183be.png)
+
+![image](https://user-images.githubusercontent.com/49510466/132308021-e2af89a2-18a5-412a-ad2c-30e061aa39f7.png)
+
 
