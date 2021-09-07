@@ -657,6 +657,7 @@ store 이미지가 v2 임을 확인
 ![image](https://user-images.githubusercontent.com/49510466/132306521-610529b5-8421-4771-8193-e276404fa228.png)
 
 Siege 결과 Availability가 100% 확인
+
 ![image](https://user-images.githubusercontent.com/49510466/132308384-6b6c73ae-cba0-4050-927f-4b51bbb75a36.png)
 
 
