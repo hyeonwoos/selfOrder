@@ -398,38 +398,38 @@ mvn package
 - Docker Image Push/deploy/서비스생성
 ```
 cd gateway
-docker build -t swatacr.azurecr.io/gateway:v1 .
-docker push swatacr.azurecr.io/gateway:v1
+docker build -t hyeonwoo.azurecr.io/gateway:v1 .
+docker push hyeonwoo.azurecr.io/gateway:v1
 
 kubectl create ns tutorial
-kubectl create deploy gateway --image=swatacr.azurecr.io/gateway:v1 -n tutorial
+kubectl create deploy gateway --image=hyeonwoo.azurecr.io/gateway:v1 -n tutorial
 kubectl expose deploy gateway --type=ClusterIP --port=8080 -n tutorial
 
-kubectl create deploy selforder --image=swatacr.azurecr.io/selforder:v1 -n tutorial
+kubectl create deploy selforder --image=hyeonwoo.azurecr.io/selforder:v1 -n tutorial
 kubectl expose deploy selforder --type=ClusterIP --port=8080 -n tutorial
 
 cd ..
 cd Payment
-docker build -t swatacr.azurecr.io/payment:v1 .
-docker push swatacr.azurecr.io/payment:v1
+docker build -t hyeonwoo.azurecr.io/payment:v1 .
+docker push hyeonwoo.azurecr.io/payment:v1
 
-kubectl create deploy payment --image=swatacr.azurecr.io/payment:v1 -n tutorial
+kubectl create deploy payment --image=hyeonwoo.azurecr.io/payment:v1 -n tutorial
 kubectl expose deploy payment --type=ClusterIP --port=8080 -n tutorial
 
 cd ..
 cd Store
-docker build -t swatacr.azurecr.io/store:v1 .
-docker push swatacr.azurecr.io/store:v1
+docker build -t hyeonwoo.azurecr.io/store:v1 .
+docker push hyeonwoo.azurecr.io/store:v1
 
-kubectl create deploy store --image=swatacr.azurecr.io/store:v1 -n tutorial
+kubectl create deploy store --image=hyeonwoo.azurecr.io/store:v1 -n tutorial
 kubectl expose deploy store --type=ClusterIP --port=8080 -n tutorial
 
 cd ..
 cd SelfOrderHome
-docker build -t swatacr.azurecr.io/selforderhome:v1 .
-docker push swatacr.azurecr.io/selforderhome:v1
+docker build -t hyeonwoo.azurecr.io/selforderhome:v1 .
+docker push hyeonwoo.azurecr.io/selforderhome:v1
 
-kubectl create deploy selforderhome --image=swatacr.azurecr.io/selforderhome:v1 -n tutorial
+kubectl create deploy selforderhome --image=hyeonwoo.azurecr.io/selforderhome:v1 -n tutorial
 kubectl expose deploy selforderhome --type=ClusterIP --port=8080 -n tutorial
 ```
 
@@ -437,8 +437,8 @@ kubectl expose deploy selforderhome --type=ClusterIP --port=8080 -n tutorial
 ```
 cd ..
 cd  SelfOrder
-docker build -t swatacr.azurecr.io/selforder:v1 .
-docker push swatacr.azurecr.io/selforder:v1
+docker build -t hyeonwoo.azurecr.io/selforder:v1 .
+docker push hyeonwoo.azurecr.io/selforder:v1
 ```
 ![image](https://user-images.githubusercontent.com/49510466/131075585-a8a4d4df-3fe8-4c5e-81fb-46e7e91686b6.png)
 
@@ -467,7 +467,7 @@ spec:
     spec:
       containers:
         - name: selforder
-          image: swatacr.azurecr.io/selforder:v1
+          image: hyeonwoo.azurecr.io/selforder:v1
           ports:
             - containerPort: 8080
           env:
@@ -611,7 +611,7 @@ swat/Store/kubernetes/deployment_n_readiness.yml
     spec:
       containers:
         - name: store
-          image: swatacr.azurecr.io/store:v1
+          image: hyeonwoo.azurecr.io/store:v1
           ports:
             - containerPort: 8080
 #          readinessProbe:
@@ -642,7 +642,7 @@ swat/Store/kubernetes/deployment.yml
     spec:
       containers:
         - name: store
-          image: swatacr.azurecr.io/store:v1
+          image: hyeonwoo.azurecr.io/store:v1
           ports:
             - containerPort: 8080
           readinessProbe:

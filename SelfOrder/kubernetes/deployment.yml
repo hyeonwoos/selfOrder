@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: selforder
-          image: swatacr.azurecr.io/selforder:v1
+          image: hyeonwoo.azurecr.io/selforder:v1
           ports:
             - containerPort: 8080
           env:

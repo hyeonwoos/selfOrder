@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: selforderhome
-          image: swatacr.azurecr.io/selforderhome:v1
+          image: hyeonwoo.azurecr.io/selforderhome:v1
           ports:
             - containerPort: 8080
           readinessProbe:
